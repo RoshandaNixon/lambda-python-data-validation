@@ -1,6 +1,6 @@
 Resources:
 
-  BillingBucketParser:
+  YourFunctionName:
     Type: AWS::Serverless::Function
     Properties:
       Handler: lambda_function.lambda_handler
