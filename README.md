@@ -26,7 +26,7 @@ This tool is designed for system administrators to automate the processing of CS
 ## Usage
 The event driven function will perform real time data validation of CSV files once they are uploaded to an S3 bucket. If errors in the file are found, the file will be moved to a specified errors bucket to be reviewed. 
 
-Invoke the function using the sam cli:
+Invoke the function using the **Sam CLI**:
 - `sam local invoke -e event.json` to test locally before deploying to AWS
 - `sam remote invoke arn:aws:lambda:...:YourFunctionName --event-file event.json` to manually invoke after deploying completed function to AWS
 
