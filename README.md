@@ -26,11 +26,10 @@ This tool is designed for system administrators to automate the processing of CS
 - Update the code to reflect your S3 error bucket name. Also tailor the product and item lists to reflect your CVS file columns based on your specific use case.
 
 ## Usage
+The event driven function will automatically validate CSV files when uploaded to an S3 bucket.
 Run the script using sam cli:
 - `sam local invoke -e event.json` to test locally
 - `sam remote invoke arn:aws:lambda:...:YourFunctionName --event-file event.json` to manually invoke after uploading complete function to AWS
-
-The event driven function will automatically validate CSV files when uploaded to an S3 bucket.
 
 After uploaded the completed function to AWS, you must create a trigger for your Lambda function.
 1. Click Add Trigger
