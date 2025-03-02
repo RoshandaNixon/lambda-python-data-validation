@@ -23,19 +23,22 @@ This tool is designed for system administrators to automate the processing of CS
 2. **Sam CLI**
 3. **Docker**
 4. **Download the boilerplate Lambda function locally**
-- Update the code to reflect your S3 error bucket name. Also tailor the product and item lists to reflect your CVS file columns based on your specific use case.
+5. Replace the boilerplate code with code provided in the `lambda_function.py` provided in this repository.
+6. Update the code to reflect your S3 error bucket name. Also tailor the product and item lists to reflect your CVS file columns based on your specific use case.
 
 ## Usage
-The event driven function will automatically validate CSV files when uploaded to an S3 bucket.
-Run the script using sam cli:
-- `sam local invoke -e event.json` to test locally
-- `sam remote invoke arn:aws:lambda:...:YourFunctionName --event-file event.json` to manually invoke after uploading complete function to AWS
+The event driven function will automatically validate data in CSV files when uploaded to an S3 bucket. If errors in the file are detected, the file will be moved to a specified errors bucket. 
+Manually invoke the function using the sam cli:
+- `sam local invoke -e event.json` to test locally before deploying to AWS
+- `sam remote invoke arn:aws:lambda:...:YourFunctionName --event-file event.json` to manually invoke after deploying completed function to AWS
 
-After uploaded the completed function to AWS, you must create a trigger for your Lambda function.
-1. Click Add Trigger
-2. Source: S3
-3. Change to "PUT"
-4. Save
+After uploading the completed function to AWS, you must create the trigger for your Lambda function.
+1. In the Lambda console, Add Trigger
+2. Select a Source: S3
+3. Choose your default bucket (not the error bucket)
+4. Change Event types to "PUT" only
+5. Save
+6. Test functionality by uploading your CSV file to the default S3 bucket
 
 ## Functionality
 
@@ -49,7 +52,7 @@ After uploaded the completed function to AWS, you must create a trigger for your
    - Check each entry of a CSV file line by line to detect invalid entries.
 
 ## Customization
-You can customize the product_line and item variable lists to reflect your preapproved values for your CVS file columns. Also change the row number that corresponds to placement in your file.
+You can customize the product_line and item variable lists to reflect your preapproved values specific to your CVS file columns. Also change the row number to corresponds to placement in your file.
 
 ## Note
 Ensure that your AWS credentials are properly configured for `boto3` to interact with AWS Lambda. Also, ensure your Lambda Function has the proper permissions to S3. 
